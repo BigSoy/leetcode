@@ -4,3 +4,13 @@
 *.jar
 *.war
 *.ear
+
+# definition of myself
+/.git/
+/.settings/
+/bin/
+/.classpath
+/.gitignore
+/.project
+*.CHM
+*.chw
