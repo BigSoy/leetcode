@@ -2,7 +2,7 @@ package problems;
 
 import java.util.Stack;
 
-public class SymmetricTree1 {	
+public class SymmetricTree1 {
 
 	public class TreeNode {
 		int val;
@@ -14,17 +14,28 @@ public class SymmetricTree1 {
 	public boolean isSymmetric(TreeNode root) {
 		if(root == null)
 			return true;
+		Stack<TreeNode> stack = new Stack<TreeNode>();
 		TreeNode l = root.left;
 		TreeNode r = root.right;
-		Stack<TreeNode> stack = new Stack<TreeNode>();
-		stack.push(r);
-		stack.push(l);
-		while(!stack.isEmpty()) {
-			l = stack.pop();
-			r = stack.pop();
-			if(l == null && r == null)
-				continue;
-			
+		while(l != null || r != null || !stack.isEmpty()) {
+			if(l == null && r == null) {
+				l = stack.pop();
+				r = stack.pop();
+			}
+			if(l == null || r == null) {
+				return false;
+			} else {
+				if(l.val != r.val)
+					return false;
+				if(r.left != null && l.right != null) {
+					stack.push(r.left);
+					stack.push(l.right);
+				} else if((r.left==null && l.right!=null) || (r.left!=null && l.right==null)) {
+					return false;
+				}
+				l = l.left;
+				r = r.right;
+			}
 		}
 		return true;
 	}
