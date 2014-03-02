@@ -13,7 +13,9 @@ public class GrayCode {
 	
 	public ArrayList<Integer> grayCode(int n) {
 		ArrayList<Integer> ret = new ArrayList<Integer>();
-		
+		int size = 1 << n;
+		for(int i=0; i<size; i++)
+			ret.add((i >>> 1) ^ i);
 		return ret;
 	}
 }
