@@ -14,6 +14,7 @@ public class GrayCode {
 	public ArrayList<Integer> grayCode(int n) {
 		ArrayList<Integer> ret = new ArrayList<Integer>();
 		
+		
 		return ret;
 	}
 }
