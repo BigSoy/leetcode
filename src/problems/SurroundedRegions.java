@@ -30,6 +30,14 @@ public class SurroundedRegions {
 	}
 	
 	private void markNotSurrounded(char[][] board, int x, int y) {
-		
+		if(x < 0 || x >= board.length || y < 0 || y >= board[0].length)
+			return;
+		if('o' == board[x][y]) {
+			board[x][y] = '#';
+			markNotSurrounded(board, x-1, y);
+			markNotSurrounded(board, x+1, y);
+			markNotSurrounded(board, x, y-1);
+			markNotSurrounded(board, x, y+1);
+		}
 	}
 }
