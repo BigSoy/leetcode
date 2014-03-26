@@ -1,11 +1,14 @@
 package problems;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
- * DFS : (Not AC) java.lang.StackOverflowError
+ * BFS : (AC)
  * @author ls
  *
  */
-public class SurroundedRegions {
+public class SurroundedRegions1 {
 
 	public void solve(char[][] board) {
 		if(board == null || board.length == 0)
@@ -34,16 +37,29 @@ public class SurroundedRegions {
 		}
 	}
 	
-	// DFS
+	// BFS
 	private void markNotSurrounded(char[][] board, int x, int y) {
-		if(x < 0 || x >= board.length || y < 0 || y >= board[0].length)
+		Queue<Integer> q = new LinkedList<Integer>();
+		visit(board, x, y, q);
+		while(!q.isEmpty()) {
+			int pos = q.poll();
+			int i = pos / board[0].length;
+			int j = pos % board[0].length;
+			visit(board, i-1, j, q);
+			visit(board, i+1, j, q);
+			visit(board, i, j-1, q);
+			visit(board, i, j+1, q);
+		}
+	}
+	
+	private void visit(char[][] board, int x, int y, Queue<Integer> q) {
+		int m = board.length;
+		int n = board[0].length;
+		if(x < 0 || x >= m || y < 0 || y >= n)
 			return;
 		if('O' == board[x][y]) {
 			board[x][y] = '#';
-			markNotSurrounded(board, x-1, y);
-			markNotSurrounded(board, x+1, y);
-			markNotSurrounded(board, x, y-1);
-			markNotSurrounded(board, x, y+1);
+			q.offer(x*n+y);
 		}
 	}
 	
