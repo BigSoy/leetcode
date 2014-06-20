@@ -8,6 +8,7 @@
 # definition of myself
 /.git/
 /.settings/
+/.metadata
 /bin/
 /.classpath
 /.gitignore
